@@ -1,0 +1,7 @@
+.venv/
+.vscode/
+
+.flake8
+.gitignore
+
+README.md
