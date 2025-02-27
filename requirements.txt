@@ -3,5 +3,6 @@ fastapi-cli~=0.0.7
 numpy~=2.2.3
 pandas~=2.2.3
 pydantic~=2.10.6
+xgboost~=2.1.4
 scikit-learn~=1.6.1
 uvicorn~=0.34.0
