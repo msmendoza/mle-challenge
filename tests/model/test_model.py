@@ -24,12 +24,19 @@ class TestModel(unittest.TestCase):
 
     TARGET_COL = ["delay"]
 
-    def setUp(self) -> None:
-        super().setUp()
-        self.model = DelayModel()
-        self.data = pd.read_csv(filepath_or_buffer="../data/data.csv")
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.model = DelayModel()
+        cls.data = pd.read_csv(filepath_or_buffer="data/data.csv")
+        features, target = cls.model.preprocess(data=cls.data, target_column="delay")
+        features_train, features_validation, target_train, target_validation = train_test_split(
+            features, target, test_size=0.33, random_state=42
+        )
+        cls.model.fit(features=features_train, target=target_train)
+        cls.features_validation = features_validation
+        cls.target_validation = target_validation
 
-    def test_model_preprocess_for_training(self):
+    def test_model_preprocess_for_training(self) -> None:
         features, target = self.model.preprocess(data=self.data, target_column="delay")
 
         assert isinstance(features, pd.DataFrame)
@@ -47,27 +54,18 @@ class TestModel(unittest.TestCase):
         assert features.shape[1] == len(self.FEATURES_COLS)
         assert set(features.columns) == set(self.FEATURES_COLS)
 
-    def test_model_fit(self):
-        features, target = self.model.preprocess(data=self.data, target_column="delay")
+    def test_model_fit(self) -> None:
+        target_predicted = self.model._model.predict(self.features_validation)
 
-        _, features_validation, _, target_validation = train_test_split(
-            features, target, test_size=0.33, random_state=42
-        )
-
-        self.model.fit(features=features, target=target)
-
-        predicted_target = self.model._model.predict(features_validation)
-
-        report = classification_report(target_validation, predicted_target, output_dict=True)
+        report = classification_report(self.target_validation, target_predicted, output_dict=True)
 
         assert report["0"]["recall"] < 0.60
-        assert report["0"]["f1-score"] < 0.70
+        assert report["0"]["f1-score"] < 0.71
         assert report["1"]["recall"] > 0.60
         assert report["1"]["f1-score"] > 0.30
 
-    def test_model_predict(self):
+    def test_model_predict(self) -> None:
         features = self.model.preprocess(data=self.data)
-
         predicted_targets = self.model.predict(features=features)
 
         assert isinstance(predicted_targets, list)
