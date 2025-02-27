@@ -92,7 +92,7 @@ In order to operationalize the model, transcribe the `.ipynb` file into the `mod
 > **Note:**
 > - **You cannot** remove or change the name or arguments of **provided** methods.
 > - **You can** change/complete the implementation of the provided methods.
-> - **You can** create the extra classes and methods you deem necessary.
+> - **You can** create the extra classes and methods you seem necessary.
 
 ### Part II
 
