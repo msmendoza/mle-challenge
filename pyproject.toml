@@ -1,0 +1,38 @@
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+lines_after_imports = 2
+
+[tool.ruff]
+line-length = 100
+lint.select = [
+    "F401",
+    "W292",
+    "W293",
+    "W505",
+    "E",    # pycodesstyle
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+]
+lint.fixable = [
+    "W292",
+    "W293",
+    "F401",
+    "W505",
+    "E",    # pycodesstyle
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+]
+lint.ignore = [
+    "B905", # zip-without-explicit-strict
+    "F401", # imported but unused
+]
+target-version = "py311"
+exclude = [".git", ".github", ".mypy_cache", ".venv", ".vscode", "ruff_cache"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
