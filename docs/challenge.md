@@ -12,3 +12,5 @@ repo and this repo only updates associated Docker images.
 1. `training_data` var was not being used.
 2. Although some better cols where found after some improvements I left the ones fixed in the
 tests.
+3. I chosed the Logistic Regression model because it is a simple model in comparison to the
+XGBoost model and performances are pretty similar > low processing costs.
