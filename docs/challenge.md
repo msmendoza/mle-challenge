@@ -5,7 +5,9 @@
 - I use IaC (Terraform) to manage **all** cloud resources, but for the sake of this challenge I will not use it. What
 would change in that case is the direct-deployment in this repo. That would be done in another centralized infra
 repo and this repo only updates associated Docker images.
-- I use Artifact Registry to store images given an IaC approach, this is skipped in this challenge.
+- I use Artifact Registry to store images given an IaC approach, this is skipped in this challenge and prefered the direct deployment via GitHub Actions for Cloud Run.
+- I would distribute a lot more code into different files, but I have the challenge constraint of not changing the structure of the project.
+- I would deploy the model as a vertex model endpoint, but I'm following challenge constraints.
 
 ## `challenge/exploration.ipynb` fixes
 
